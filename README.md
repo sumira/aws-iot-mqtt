@@ -2,6 +2,6 @@
 ## This project is focused on MQTT service is provided by AWS
 ### Used technologies
 1.AWS IOT Core
-2.Paho MQTT Broker
+1.Paho MQTT Broker
 
 
