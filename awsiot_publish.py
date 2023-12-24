@@ -2,7 +2,7 @@ import paho.mqtt.client as paho
 import os
 import socket
 import ssl
-from time import sleep
+from time import sleep, time
 from random import uniform
 import json
 
@@ -40,11 +40,12 @@ mqttc.loop_start()
 while True:
     sleep(0.5)
     if connflag:
+        timestamp = int(time())  # Current timestamp in seconds since the epoch
         temperature_reading = uniform(20.0, 25.0)
         humidity_reading = uniform(40.0, 60.0)
         
-        temperature_message = {"type": "temperature", "value": "%.2f" % temperature_reading}
-        humidity_message = {"type": "humidity", "value": "%.2f" % humidity_reading}
+        temperature_message = {"timestamp": timestamp, "type": "temperature", "value": "%.2f" % temperature_reading}
+        humidity_message = {"timestamp": timestamp, "type": "humidity", "value": "%.2f" % humidity_reading}
         
         mqttc.publish("environment", json.dumps(temperature_message), qos=1)
         mqttc.publish("environment", json.dumps(humidity_message), qos=1)
