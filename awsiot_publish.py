@@ -8,8 +8,8 @@ import uuid
 
 connflag = False
 
-aws_access_key_id = 'AKIAU744T2435MBWSD4I'
-aws_secret_access_key = '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'
+aws_access_key_id = '*************'
+aws_secret_access_key = '*******************'
 aws_region = 'Global'
 
 awshost = "a17uo13akgrdvr-ats.iot.ap-southeast-2.amazonaws.com"
