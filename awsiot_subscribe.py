@@ -1,15 +1,11 @@
 import paho.mqtt.client as paho
-import os
-import socket
 import ssl
-from time import time
 import json
 
 def on_connect(client, userdata, flags, rc):
-    print("Connection returned result: " + str(rc))
-    # Subscribing in on_connect() means that if we lose the connection and
-    # reconnect then subscriptions will be renewed.
-    client.subscribe("#", 1)
+    print(f"Connected with result code {rc}")
+    client.subscribe("environment/temperature", qos=1)
+    client.subscribe("environment/humidity", qos=1)
 
 def on_message(client, userdata, msg):
     payload_str = msg.payload.decode("utf-8")
@@ -28,7 +24,6 @@ mqttc.on_message = on_message
 awshost = "a17uo13akgrdvr-ats.iot.ap-southeast-2.amazonaws.com"
 awsport = 8883
 clientId = "aws-iot-mqtt"
-thingName = "aws-iot-mqtt"
 caPath = "AmazonRootCA1.pem"
 certPath = "59eab497ba83881dd36837ba45357dfd391fb29f44a2b59db0be8cd014fe7b08-certificate.pem.crt"
 keyPath = "59eab497ba83881dd36837ba45357dfd391fb29f44a2b59db0be8cd014fe7b08-private.pem.key"
